@@ -207,14 +207,14 @@ Use this space to list resources you find helpful and would like to give credit 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/Luka-Spa/SwipeRight?color=blue&style=for-the-badge
 [contributors-url]: https://github.com/Luka-Spa/SwipeRight/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/Luka-Spa/SwipeRight?style=for-the-badge
 [forks-url]: https://github.com/Luka-Spa/SwipeRight/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/Luka-Spa/SwipeRight?style=for-the-badge
 [stars-url]: https://github.com/Luka-Spa/SwipeRight/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/Luka-Spa/SwipeRight?style=for-the-badge
 [issues-url]: https://github.com/Luka-Spa/SwipeRight/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/Luka-Spa/SwipeRight?style=for-the-badge
 [license-url]: https://github.com/Luka-Spa/SwipeRight/blob/main/LICENSE
 [product-screenshot]: images/screenshot.png
