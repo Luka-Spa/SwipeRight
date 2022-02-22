@@ -23,9 +23,12 @@
     <br />
     <a href="https://github.com/Luka-Spa/SwipeRight">View Demo</a>
     ·
+    <a href="https://trello.com/b/NQ6xU4Hq/swiperight">View Project Board</a>
+    .
     <a href="https://github.com/Luka-Spa/SwipeRight/issues">Report Bug</a>
     ·
     <a href="https://github.com/Luka-Spa/SwipeRight/issues">Request Feature</a>
+
   </p>
 </div>
 
@@ -46,7 +49,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
