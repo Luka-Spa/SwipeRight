@@ -58,7 +58,15 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+SwipeRight is a clone of modern dating apps like Tinder or Bumble. <br>
+What I am doing differently is it open source and removing the shallow appearance-based swiping. <br>
+
+I am doing this as a school project for semester 6 of Software.<br>
+The end goal is to prove that I can build secure, scalable and high quality software.
+
+<a href="https://github.com/Luka-Spa/SwipeRight">
+    <img src="img/SwipeRight_Screen_Swipe.png" alt="Screenshot" width="211" height="429">
+  </a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -129,4 +137,3 @@ Resources that really helped me in the process:
 [issues-url]: https://github.com/Luka-Spa/SwipeRight/issues
 [license-shield]: https://img.shields.io/github/license/Luka-Spa/SwipeRight?style=for-the-badge
 [license-url]: https://github.com/Luka-Spa/SwipeRight/blob/main/LICENSE
-[product-screenshot]: img/SwipeRight_Screen_Swipe.png
