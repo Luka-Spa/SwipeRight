@@ -19,6 +19,3 @@
 # System Files
 .DS_Store
 Thumbs.db
-
-# Documentation Files
-*.docx
