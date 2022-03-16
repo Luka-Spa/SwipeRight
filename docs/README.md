@@ -16,4 +16,4 @@ These files make up the content:
 
 1. Install **Python** [here](https://www.python.org/) and make sure pip is installed
 2. Install **docx2pdf** by running `pip install docx2pdf`
-3. Run `docx2pdf ./src ./out` in the `SwipeRight/docs` folder
+3. Run `docx2pdf ./src ./dist` in the `SwipeRight/docs` folder
