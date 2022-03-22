@@ -1,18 +1,11 @@
 package repository
 
 import (
-<<<<<<< HEAD
-	"SwipeRight_Profile_Service/config"
-	"log"
-	"time"
-
-=======
 	"log"
 	"time"
 
 	"github.com/Luka-Spa/SwipeRight/packages/profile_service/config"
 
->>>>>>> 18c1201 (new commit)
 	"github.com/gocql/gocql"
 	"github.com/spf13/viper"
 )

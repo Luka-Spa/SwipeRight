@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-module SwipeRight_Profile_Service
-=======
 module github.com/Luka-Spa/SwipeRight/packages/profile_service
->>>>>>> 18c1201 (new commit)
 
 go 1.18
 
