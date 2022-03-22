@@ -1,10 +1,18 @@
 package httpRouter
 
 import (
+<<<<<<< HEAD
 	"SwipeRight_Profile_Service/config"
 	"SwipeRight_Profile_Service/router/http/handler"
 	"fmt"
 
+=======
+	"fmt"
+
+	"github.com/Luka-Spa/SwipeRight/packages/profile_service/config"
+	"github.com/Luka-Spa/SwipeRight/packages/profile_service/router/http/handler"
+
+>>>>>>> 18c1201 (new commit)
 	"github.com/gin-gonic/gin"
 )
 
