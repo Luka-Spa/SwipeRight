@@ -23,7 +23,7 @@
 
 ## Folder Structure
 
-```js
+```c++
 PROFILE_SERVICE
 │   README.md
 │   ...
@@ -49,7 +49,7 @@ PROFILE_SERVICE
 |   |   user_profile.go // Model for the user
 |   |   ...
 └───config
-    |   config.go // Initialized the configuration & provides GetConfig function
+    |   config.go // Initializes the configuration & provides GetConfig function
     |   development.yaml // Contains the development configuration
     |   ...
 ```
