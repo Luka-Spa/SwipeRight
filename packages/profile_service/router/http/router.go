@@ -15,8 +15,10 @@ func Init() {
 
 	engine.Use(gin.Recovery())
 
-	apiv1 := engine.Group("/api/")
-	apiv1.GET("/user", handler.GetAllUsers)
+	api := engine.Group("/api/")
+
+	//Routes are defined here
+	api.GET("/user", handler.GetAllUsers)
 
 	fmt.Println(engine.Run(fmt.Sprintf(":%s", config.GetString("http.port"))))
 }
