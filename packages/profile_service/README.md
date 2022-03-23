@@ -22,7 +22,7 @@
 
 ## Folder Structure
 
-```js
+```c++
 PROFILE_SERVICE
 │   README.md
 │   ...
