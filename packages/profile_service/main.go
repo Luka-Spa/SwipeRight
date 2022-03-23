@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/Luka-Spa/SwipeRight/packages/profile_service/config"
+	"github.com/Luka-Spa/SwipeRight/packages/profile_service/repository"
 	httpRouter "github.com/Luka-Spa/SwipeRight/packages/profile_service/router/http"
 )
 
@@ -18,6 +19,7 @@ func main() {
 	}
 	flag.Parse()
 	config.Init(*environment)
+	repository.Init()
 	httpRouter.Init()
-
+	defer repository.DB.Close()
 }

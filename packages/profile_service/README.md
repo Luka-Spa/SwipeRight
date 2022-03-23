@@ -8,8 +8,9 @@
 
 ## How to run?
 
-1. Run `go get` in the current directory to install the dependencies
-2. Run `go run .` to run the project
+1. Make sure [Apache Cassandra](https://cassandra.apache.org/_/index.html) is installed & running
+2. Run `go get` in the current directory to install the dependencies
+3. Run `go run .` to run the project
 
 ## Techstack
 
@@ -33,7 +34,7 @@ PROFILE_SERVICE
 │       │   router.go // Registers HTTP Routes
 │       │   ...
 |       └───handler
-|           |   user.go // Contains the user route handler functions
+|           |   user_handler.go // Contains the user route handler functions
 |           |   ...
 │
 └───repository

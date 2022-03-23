@@ -12,7 +12,7 @@ import (
 func Init() {
 	config := config.GetConfig()
 	engine := gin.Default()
-
+	engine.SetTrustedProxies([]string{})
 	engine.Use(gin.Recovery())
 
 	api := engine.Group("/api/")
