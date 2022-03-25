@@ -16,3 +16,9 @@ func GetUserFirstnameById() string {
 	fmt.Println(firstname)
 	return firstname
 }
+
+func GetUser() map[string]interface{} {
+	var query = "SELECT value FROM profile.user_profile_table WHERE pk=0;"
+	user := repository.ReadCassandraQuery(query)[0]
+	return user;
+}

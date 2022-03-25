@@ -4,6 +4,7 @@ import (
 	"github.com/Luka-Spa/SwipeRight/packages/profile_service/repository/cassandra"
 )
 
-func GetUserFirstnameById() string {
-	return cassandra.GetUserFirstnameById();
+func GetUserFirstnameById() map[string]interface{} {
+	//return cassandra.GetUserFirstnameById();
+	return cassandra.GetUser()
 }

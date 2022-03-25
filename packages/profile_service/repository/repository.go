@@ -48,3 +48,12 @@ func ReadSingleCassandraQuery(query string, values ...interface{}) interface{} {
 	}
 	return result;
 }
+
+func ReadCassandraQuery(query string, values ...interface{}) []map[string]interface{} {
+	//var result map[string]interface{}
+	result, err:= DB.Query(query).Bind(values...).Iter().SliceMap();
+	if err != nil {
+		fmt.Println(err)
+	}
+	return result;
+}
