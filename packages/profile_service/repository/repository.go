@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var DB *gocql.Session;
+var DB *gocql.Session
 
 func Init() {
 	config := config.GetConfig()
@@ -29,31 +29,22 @@ func cassandraConnection(config *viper.Viper) {
 	DB, err = cluster.CreateSession()
 
 	if err != nil {
-	log.Println(err)
-	return
+		log.Println(err)
+		return
 	}
 	fmt.Println("Connected to Cassandra")
 }
 
-func ExecCassandraQuery(query string, values ...interface{}) {
-	if err:= DB.Query(query).Bind(values...).Exec(); err != nil {
-		log.Fatal(err)
-	}
-}
-
-func ReadSingleCassandraQuery(query string, values ...interface{}) interface{} {
-	var result string
-	if err:= DB.Query(query).Bind(values...).Scan(&result); err != nil {
+func CassandraWrite(query string, values ...interface{}) {
+	if err := DB.Query(query).Bind(values...).Exec(); err != nil {
 		fmt.Println(err)
 	}
-	return result;
 }
 
-func ReadCassandraQuery(query string, values ...interface{}) []map[string]interface{} {
-	//var result map[string]interface{}
-	result, err:= DB.Query(query).Bind(values...).Iter().SliceMap();
+func CassandraReadSingle[T any](query string, result T, values ...interface{}) T {
+	err := DB.Query(query).Bind(values...).Scan(&result)
 	if err != nil {
 		fmt.Println(err)
 	}
-	return result;
+	return result
 }
