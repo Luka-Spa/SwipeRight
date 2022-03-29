@@ -8,6 +8,6 @@ import (
 )
 
 func GetAllUsers(c *gin.Context) {
-	var firstname = logic.GetUserFirstnameById()
+	var firstname = logic.GetAll()
 	c.JSON(http.StatusOK, gin.H{"first_name":firstname})
 }
