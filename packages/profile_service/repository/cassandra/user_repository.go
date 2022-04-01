@@ -15,14 +15,14 @@ func NewUserRepository() *UserRepository {
 }
 
 func (repo *UserRepository) All() ([]model.UserProfile, error) {
-	var query = "SELECT value FROM profile.user_profile_table WHERE pk=0;"
+	var query = "SELECT value FROM profile.user_profile_table;"
 	var user model.UserProfile
-	user = CassandraReadSingle(query, user)
-	var users []model.UserProfile
-	return append(users, user), nil
+	//user = CassandraReadSingle(query, user)
+	users := CassandraRead(query, user)
+	return users, nil
 }
 
-func (repo *UserRepository) Create(user model.UserProfile) {
-	var query = "INSERT INTO profile.user_profile_table (pk, value)"
-	CassandraWrite(query,uuid.New() , user)
+func (repo *UserRepository) Create(user model.UserProfile) error {
+	var query = "INSERT INTO profile.user_profile_table (pk, value) values (?,?);"
+	return CassandraWrite(query,uuid.New() , user)
 }

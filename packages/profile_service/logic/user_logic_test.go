@@ -13,11 +13,9 @@ type MockRepository struct {
 	mock.Mock
 }
 
-// func (mock *MockRepository) Save(UserProfile *model.UserProfile) (*model.UserProfile, error) {
-// 	args := mock.Called()
-// 	result := args.Get(0)
-// 	return result.(*model.UserProfile), args.Error(1)
-// }
+func (mock *MockRepository) Create(user model.UserProfile) (error) {
+	return nil
+}
 
 func (mock *MockRepository) All() ([]model.UserProfile, error) {
 	args := mock.Called()
@@ -47,4 +45,15 @@ func TestGetAll(t *testing.T) {
 	assert.Equal(t, id, result[0].Id)
 	assert.Equal(t, time, result[0].CreatedAt)
 	assert.Equal(t, firstName, result[0].Firstname)
+}
+
+func TestCreate(t *testing.T) {
+	mockRepo := new(MockRepository)
+	var id = 1
+	var firstName = "Go"
+	var	time = time.Now()
+	userProfile := model.UserProfile{Id:id, Firstname: firstName, CreatedAt: time }
+	testService := NewUserlogic(mockRepo)
+	testService.Create(userProfile)
+	mockRepo.AssertExpectations(t)
 }

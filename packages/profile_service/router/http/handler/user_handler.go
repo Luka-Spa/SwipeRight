@@ -27,5 +27,6 @@ func (handler *userHandler) CreateUser(c *gin.Context) {
 	if err :=validate(c, &user); err != nil {
 		return
 	}
+	userLogic.Create(user)
 	c.IndentedJSON(http.StatusCreated, user)
 }

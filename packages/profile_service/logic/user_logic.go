@@ -9,6 +9,7 @@ var userRepository repository.IUserRepository
 
 type IUserLogic interface {
 	 GetAll() []model.UserProfile
+	 Create(user model.UserProfile)
 }
 type logic struct {}
 
@@ -20,4 +21,8 @@ func NewUserlogic(repository repository.IUserRepository) *logic {
 func (*logic) GetAll() []model.UserProfile {
 	users,_ := userRepository.All()
 	return users
+}
+
+func (*logic) Create(user model.UserProfile) {
+	userRepository.Create(user)
 }

@@ -26,10 +26,12 @@ func Connect(config *viper.Viper) *gocql.Session {
 	return DB
 }
 
-func CassandraWrite(query string, values ...interface{}) {
+func CassandraWrite(query string, values ...interface{}) error {
 	if err := DB.Query(query).Bind(values...).Exec(); err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
+		return err
 	}
+	return nil
 }
 
 func CassandraReadSingle[T any](query string, result T, values ...interface{}) T {
@@ -38,4 +40,24 @@ func CassandraReadSingle[T any](query string, result T, values ...interface{}) T
 		fmt.Println(err)
 	}
 	return result
+}
+
+func CassandraRead[T any](query string, result T, values ...interface{}) []T {
+	var results []T
+	scanner := DB.Query(query).Bind(values...).Iter().Scanner()
+	for scanner.Next() {
+		var item T
+		err := scanner.Scan(&item)
+		if err != nil {
+			log.Fatal(err)
+		}
+		results = append(results, item)
+		fmt.Println("Tweet:", item)
+	}
+	// scanner.Err() closes the iterator, so scanner nor iter should be used afterwards.
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+	return results
+
 }
