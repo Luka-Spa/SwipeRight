@@ -52,9 +52,7 @@ func CassandraRead[T any](query string, result T, values ...interface{}) []T {
 			log.Fatal(err)
 		}
 		results = append(results, item)
-		fmt.Println("Tweet:", item)
 	}
-	// scanner.Err() closes the iterator, so scanner nor iter should be used afterwards.
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
