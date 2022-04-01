@@ -44,3 +44,4 @@ jobs:
           version: "2022.1"
           min-go-version: "1.18"
           install-go: false
+          working-directory: packages/profile
