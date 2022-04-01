@@ -24,7 +24,7 @@
 ## Folder Structure
 
 ```c++
-PROFILE_SERVICE
+profile
 │   README.md
 │   ...
 │

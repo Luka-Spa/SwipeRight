@@ -3,8 +3,8 @@ package handler
 import (
 	"net/http"
 
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/logic"
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/model"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/logic"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
 	"github.com/gin-gonic/gin"
 )
 

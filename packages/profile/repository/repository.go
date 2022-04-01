@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/config"
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/repository/cassandra"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/config"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/repository/cassandra"
 
 	"github.com/gocql/gocql"
 )

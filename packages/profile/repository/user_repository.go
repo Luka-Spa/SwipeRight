@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/Luka-Spa/SwipeRight/packages/profile_service/model"
+import "github.com/Luka-Spa/SwipeRight/packages/profile/model"
 
 
 type IUserRepository interface {

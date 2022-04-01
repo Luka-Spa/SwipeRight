@@ -1,4 +1,4 @@
-module github.com/Luka-Spa/SwipeRight/packages/profile_service
+module github.com/Luka-Spa/SwipeRight/packages/profile
 
 go 1.18
 

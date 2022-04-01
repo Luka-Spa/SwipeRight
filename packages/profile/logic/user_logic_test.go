@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/model"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/model"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 )

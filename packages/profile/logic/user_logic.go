@@ -1,8 +1,8 @@
 package logic
 
 import (
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/model"
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/repository"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/repository"
 )
 
 var userRepository repository.IUserRepository

@@ -1,7 +1,7 @@
 package cassandra
 
 import (
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/model"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
 	"github.com/google/uuid"
 )
 

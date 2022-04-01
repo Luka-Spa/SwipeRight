@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/config"
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/repository"
-	httpRouter "github.com/Luka-Spa/SwipeRight/packages/profile_service/router/http"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/config"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/repository"
+	httpRouter "github.com/Luka-Spa/SwipeRight/packages/profile/router/http"
 )
 
 

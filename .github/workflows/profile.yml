@@ -2,17 +2,17 @@ name: Go
 
 defaults:
   run:
-    working-directory: packages/profile_service
+    working-directory: packages/profile
 
 on:
   push:
     branches: [main, staging, development]
     paths:
-      - packages/profile_service/**
+      - packages/profile/**
   pull_request:
     branches: [main, staging, development]
     paths:
-      - packages/profile_service/**
+      - packages/profile/**
 
 jobs:
   build:

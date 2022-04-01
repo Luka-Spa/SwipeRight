@@ -3,10 +3,10 @@ package httpRouter
 import (
 	"fmt"
 
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/config"
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/logic"
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/repository"
-	"github.com/Luka-Spa/SwipeRight/packages/profile_service/router/http/handler"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/config"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/logic"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/repository"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/router/http/handler"
 
 	"github.com/gin-gonic/gin"
 )
