@@ -1,5 +1,7 @@
 # SwipeRight Profile Service
 
+![Codecov](https://img.shields.io/codecov/c/github/Luka-Spa/SwipeRight?style=flat-square)
+
 ## Table of Contents
 
 1. How to run?
