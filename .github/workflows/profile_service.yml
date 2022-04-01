@@ -1,0 +1,40 @@
+name: Go
+
+on:
+  push:
+    branches: [ main, staging, development ]
+    paths:
+      - packages/profile_service/**
+  pull_request:
+    branches: [ main, staging, development ]
+    paths:
+      - packages/profile_service/**
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.17
+    - name: Build
+      run: go build -v ./...
+    
+    - name: Test
+      run: go test -v ./...
+      
+    - name: Run vet & lint
+      run: |
+        go vet .
+        golint .
+    
+    - name: Run staticcheck
+    - uses: dominikh/staticcheck-action@v1.1.0
+      with:
+        version: "2022.1"
+
+   
