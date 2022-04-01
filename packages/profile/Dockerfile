@@ -17,5 +17,5 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /app/build .
-COPY --from=builder /app/config/*.yaml ./config/
+# COPY --from=builder /app/config/*.yaml ./config/
 CMD ["./build"]
