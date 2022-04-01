@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  cassandra:
+    container_name: cassandra
+    image: cassandra:4.0
+    hostname: cassandra
+    restart: always
+    ports:
+      - 9042:9042
+    volumes:
+      - ~/apps/cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=profile
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "cqlsh",
+          "-u cassandra",
+          "-p cassandra",
+          "-e describe keyspaces",
+        ]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+  cqlsh:
+    container_name: cassandra-load-cql
+    image: cassandra:4.0
+    links:
+      - cassandra:cassandra
+    depends_on:
+      cassandra:
+        condition: service_healthy
+    volumes:
+      - ./data.cql:/schema.cql
+    command: /bin/bash -c "echo loading cassandra keyspace && cqlsh cassandra -f /schema.cql"
+  profile:
+    container_name: profile
+    image: swiperight/profile
+    depends_on:
+      cassandra:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    links:
+      - cassandra:cassandra
+    environment:
+      - CASSANDRA_HOSTS=cassandra
+      - CASSANDRA_keyspace=profile
+      - CASSANDRA_USERNAME=
+      - CASSANDRA_PASSWORD=
