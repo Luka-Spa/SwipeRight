@@ -20,8 +20,9 @@ func Connect(config *viper.Viper) *gocql.Session {
 	DB, err = cluster.CreateSession()
 	if err != nil {
 		log.Println(err)
-	}
+	} else {
 	fmt.Println("Connected to Cassandra")
+	}
 	return DB
 }
 

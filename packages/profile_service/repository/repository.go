@@ -8,12 +8,12 @@ import (
 )
 
 var DB *gocql.Session
-var UserProfile IUserRepository
+var UserRepository IUserRepository
 
 func Init() {
 	config := config.GetConfig()
 	cassandra.Connect(config)
-	UserProfile = cassandra.NewUserRepository()
+	UserRepository = cassandra.NewUserRepository()
 }
 
 

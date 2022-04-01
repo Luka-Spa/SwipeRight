@@ -21,5 +21,6 @@ func main() {
 	config.Init(*environment)
 	repository.Init()
 	httpRouter.Init()
+
 	defer repository.DB.Close()
 }

@@ -5,8 +5,19 @@ import (
 	"github.com/Luka-Spa/SwipeRight/packages/profile_service/repository"
 )
 
-func GetAll() []model.UserProfile {
-	//return cassandra.GetUserFirstnameById();
-	//return cassandra.GetUser()
-	return repository.UserProfile.All()
+var userRepository repository.IUserRepository
+
+type IUserLogic interface {
+	 GetAll() []model.UserProfile
+}
+type logic struct {}
+
+func NewUserlogic(repository repository.IUserRepository) *logic {
+	userRepository = repository
+	return &logic{}
+}
+
+func (*logic) GetAll() []model.UserProfile {
+	users,_ := userRepository.All()
+	return users
 }
