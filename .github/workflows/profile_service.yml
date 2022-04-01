@@ -33,10 +33,8 @@ jobs:
     - name: Test
       run: go test -v ./...
       
-    - name: Run vet & lint
-      run: |
-        go vet .
-        golint .
+    - name: Run vet
+      run: go vet .
     
     - name: Run staticcheck
       uses: dominikh/staticcheck-action@v1.1.0
