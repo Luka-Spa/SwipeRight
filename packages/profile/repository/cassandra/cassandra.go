@@ -28,7 +28,7 @@ func Connect(config *viper.Viper) *gocql.Session {
 
 func CassandraWrite(query string, values ...interface{}) error {
 	if err := DB.Query(query).Bind(values...).Exec(); err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 		return err
 	}
 	return nil
@@ -49,12 +49,12 @@ func CassandraRead[T any](query string, result T, values ...interface{}) []T {
 		var item T
 		err := scanner.Scan(&item)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(err)
 		}
 		results = append(results, item)
 	}
 	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 	return results
 
