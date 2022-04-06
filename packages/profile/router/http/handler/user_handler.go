@@ -6,6 +6,8 @@ import (
 	"github.com/Luka-Spa/SwipeRight/packages/profile/logic"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
 	"github.com/gin-gonic/gin"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type userHandler struct {}
@@ -27,6 +29,9 @@ func (handler *userHandler) CreateUser(c *gin.Context) {
 	if err :=validate(c, &user); err != nil {
 		return
 	}
-	userLogic.Create(user)
-	c.IndentedJSON(http.StatusCreated, user)
+	if err := userLogic.Create(user); err != nil {
+		log.Error(err)
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": "something went wrong"})
+	}
+	c.JSON(http.StatusCreated, user)
 }

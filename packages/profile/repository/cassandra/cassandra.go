@@ -1,10 +1,9 @@
 package cassandra
 
 import (
-	"fmt"
-	"log"
-
 	"github.com/gocql/gocql"
+	"github.com/mitchellh/mapstructure"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
@@ -19,16 +18,17 @@ func Connect(config *viper.Viper) *gocql.Session {
 	var err error
 	DB, err = cluster.CreateSession()
 	if err != nil {
-		log.Println(err)
+		log.Errorln(err)
+		log.Fatal("Unable to connect to Cassandra")
 	} else {
-	fmt.Println("Connected to Cassandra")
+		log.Infof("Connected to Cassandra")
 	}
 	return DB
 }
 
 func CassandraWrite(query string, values ...interface{}) error {
 	if err := DB.Query(query).Bind(values...).Exec(); err != nil {
-		fmt.Println(err)
+		log.Error(err)
 		return err
 	}
 	return nil
@@ -37,25 +37,23 @@ func CassandraWrite(query string, values ...interface{}) error {
 func CassandraReadSingle[T any](query string, result T, values ...interface{}) T {
 	err := DB.Query(query).Bind(values...).Scan(&result)
 	if err != nil {
-		fmt.Println(err)
+		log.Error(err)
 	}
 	return result
 }
 
 func CassandraRead[T any](query string, result T, values ...interface{}) []T {
-	var results []T
-	scanner := DB.Query(query).Bind(values...).Iter().Scanner()
-	for scanner.Next() {
-		var item T
-		err := scanner.Scan(&item)
-		if err != nil {
-			fmt.Println(err)
+	var results = []T{}
+	m := map[string]interface{}{}
+	iter := DB.Query(query).Iter()
+	for iter.MapScan(m) {
+		var result T
+		if err := mapstructure.Decode(m, &result); err != nil {
+			log.Error(err)
 		}
-		results = append(results, item)
-	}
-	if err := scanner.Err(); err != nil {
-		fmt.Println(err)
+		results = append(results, result)
+		m = map[string]interface{}{}
 	}
 	return results
-
 }
+

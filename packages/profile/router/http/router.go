@@ -2,6 +2,7 @@ package httpRouter
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/Luka-Spa/SwipeRight/packages/profile/config"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/logic"
@@ -26,6 +27,9 @@ func Init() {
 
 	//Routes are defined here
 	api.GET("/user", userHandler.GetAllUsers)
+	api.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message":"ok"})
+	})
 	api.POST("/user", userHandler.CreateUser)
 
 	fmt.Println(engine.Run(fmt.Sprintf(":%s", config.GetString("http.port"))))

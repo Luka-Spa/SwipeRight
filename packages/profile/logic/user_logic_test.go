@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -26,7 +27,7 @@ func (mock *MockRepository) All() ([]model.UserProfile, error) {
 func TestGetAll(t *testing.T) {
 	mockRepo := new(MockRepository)
 
-	var id = 1
+	var id, _ = uuid.NewUUID()
 	var firstName = "Go"
 	var	time = time.Now()
 
@@ -49,11 +50,12 @@ func TestGetAll(t *testing.T) {
 
 func TestCreate(t *testing.T) {
 	mockRepo := new(MockRepository)
-	var id = 1
+	var id, _ = uuid.NewUUID()
 	var firstName = "Go"
 	var	time = time.Now()
 	userProfile := model.UserProfile{Id:id, Firstname: firstName, CreatedAt: time }
 	testService := NewUserlogic(mockRepo)
-	testService.Create(userProfile)
+	err :=testService.Create(userProfile)
 	mockRepo.AssertExpectations(t)
+	assert.Equal(t,nil,err)
 }
