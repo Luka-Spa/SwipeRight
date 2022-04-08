@@ -14,6 +14,9 @@ import (
 
 func Init() {
 	config := config.GetConfig()
+	if config.GetString("environment") == "production" {
+		gin.SetMode("production")
+	}
 	engine := gin.Default()
 
 	userRepository := repository.UserRepository
@@ -28,7 +31,7 @@ func Init() {
 	//Routes are defined here
 	api.GET("/user", userHandler.GetAllUsers)
 	api.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message":"ok"})
+		c.JSON(http.StatusOK, gin.H{"message": "ok"})
 	})
 	api.POST("/user", userHandler.CreateUser)
 

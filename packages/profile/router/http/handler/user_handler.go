@@ -10,7 +10,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type userHandler struct {}
+type userHandler struct{}
 
 var userLogic logic.IUserLogic
 
@@ -26,12 +26,14 @@ func (handler *userHandler) GetAllUsers(c *gin.Context) {
 
 func (handler *userHandler) CreateUser(c *gin.Context) {
 	var user model.UserProfile
-	if err :=validate(c, &user); err != nil {
+	if err := validate(c, &user); err != nil {
 		return
 	}
 	if err := userLogic.Create(user); err != nil {
 		log.Error(err)
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": "something went wrong"})
+		c.Done()
+		return
 	}
 	c.JSON(http.StatusCreated, user)
 }
