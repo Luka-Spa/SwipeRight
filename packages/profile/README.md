@@ -1,7 +1,7 @@
 # SwipeRight Profile Service
 
-![Codecov](https://img.shields.io/codecov/c/github/Luka-Spa/SwipeRight?style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Luka-Spa/SwipeRight/Go?style=flat-square)
+<a href="https://app.codecov.io/gh/Luka-Spa/SwipeRight">![Codecov](https://img.shields.io/codecov/c/github/Luka-Spa/SwipeRight?style=flat-square)</a>
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Luka-Spa/SwipeRight/Go?style=flat-square&link=https://app.codecov.io/gh/Luka-Spa/SwipeRight)
 
 ## Table of Contents
 
