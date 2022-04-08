@@ -8,6 +8,7 @@ import (
 	"github.com/Luka-Spa/SwipeRight/packages/profile/config"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/repository"
 	httpRouter "github.com/Luka-Spa/SwipeRight/packages/profile/router/http"
+	log "github.com/sirupsen/logrus"
 )
 
 
@@ -18,6 +19,7 @@ func main() {
 		os.Exit(1)
 	}
 	flag.Parse()
+	log.Infof("Server starting in a %s environment", *environment)
 	config.Init(*environment)
 	repository.Init()
 	httpRouter.Init()

@@ -8,11 +8,15 @@ on:
   push:
     branches: [main, staging, development]
     paths:
-      - packages/profile/**
+      - "packages/profile/**.go"
+      - "packages/profile/**.mod"
+      - "packages/profile/**.sum"
   pull_request:
     branches: [main, staging, development]
     paths:
-      - packages/profile/**
+      - "packages/profile/**.go"
+      - "packages/profile/**.mod"
+      - "packages/profile/**.sum"
 
 jobs:
   build:
@@ -42,10 +46,8 @@ jobs:
         run: |
           go install "honnef.co/go/tools/cmd/staticcheck@2022.1"
           $(go env GOPATH)/bin/staticcheck ./...
-          
+
       - name: Run coverage
         run: go test -race -covermode=atomic -coverprofile=coverage.out -v ./...
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
-
-

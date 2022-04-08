@@ -9,7 +9,7 @@ var userRepository repository.IUserRepository
 
 type IUserLogic interface {
 	 GetAll() []model.UserProfile
-	 Create(user model.UserProfile)
+	 Create(user model.UserProfile) error
 }
 type logic struct {}
 
@@ -23,6 +23,6 @@ func (*logic) GetAll() []model.UserProfile {
 	return users
 }
 
-func (*logic) Create(user model.UserProfile) {
-	userRepository.Create(user)
+func (*logic) Create(user model.UserProfile) error {
+	return userRepository.Create(user)
 }
