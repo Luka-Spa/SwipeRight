@@ -1,0 +1,5 @@
+kafka:
+  topic: "recommendation"
+  brokers:
+    - http://broker1.com
+    - http://broker2.com
