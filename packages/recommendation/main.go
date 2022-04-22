@@ -7,6 +7,7 @@ import (
 	"syscall"
 
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/config"
+	httpRouter "github.com/Luka-Spa/SwipeRight/packages/recommendation/router/http"
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/service/consumer"
 )
 
@@ -18,7 +19,8 @@ func main() {
 	}
 	flag.Parse()
 	config.Init(*environment)
-	consumer.NewKafkaConsumer().Run()
+	httpRouter.Init()
+	consumer.NewKafkaConsumer().ConsumeUserProfile()
 	waitForSyscall()
 }
 

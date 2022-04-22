@@ -8,6 +8,13 @@ require (
 )
 
 require (
+	github.com/klauspost/compress v1.14.2 // indirect
+	github.com/pierrec/lz4/v4 v4.1.14 // indirect
+	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect
+	github.com/xdg/stringprep v1.0.0 // indirect
+)
+
+require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
@@ -43,6 +50,7 @@ require (
 require (
 	github.com/go-playground/validator/v10 v10.10.1
 	github.com/google/uuid v1.3.0
+	github.com/segmentio/kafka-go v0.4.31
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/viper v1.10.1
 	github.com/stretchr/testify v1.7.1
