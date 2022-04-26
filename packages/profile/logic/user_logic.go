@@ -3,15 +3,16 @@ package logic
 import (
 	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/repository"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/util/producer"
 )
 
 var userRepository repository.IUserRepository
 
 type IUserLogic interface {
-	 GetAll() []model.UserProfile
-	 Create(user model.UserProfile) error
+	GetAll() []model.UserProfile
+	Create(user model.UserProfile) error
 }
-type logic struct {}
+type logic struct{}
 
 func NewUserlogic(repository repository.IUserRepository) *logic {
 	userRepository = repository
@@ -19,10 +20,14 @@ func NewUserlogic(repository repository.IUserRepository) *logic {
 }
 
 func (*logic) GetAll() []model.UserProfile {
-	users,_ := userRepository.All()
+	users, _ := userRepository.All()
 	return users
 }
 
 func (*logic) Create(user model.UserProfile) error {
-	return userRepository.Create(user)
+	user, err := userRepository.Create(user)
+	if err == nil {
+		producer.CreateUserProfile(user)
+	}
+	return err
 }

@@ -3,11 +3,11 @@ package model
 import (
 	"time"
 
-	"github.com/google/uuid"
+	"github.com/gocql/gocql"
 )
 
 type UserProfile struct {
-	Id              uuid.UUID       `cql:"id" json:"id"`
+	Id              gocql.UUID      `cql:"id" json:"id"`
 	Email           string          `cql:"email" json:"email" binding:"required,email" encrypt:""`
 	ProfileImageUrl string          `cql:"profile_image_url" mapstructure:"profile_image_url" json:"profile_image_url" binding:"required,url"`
 	Firstname       string          `cql:"first_name" json:"first_name" mapstructure:"first_name" binding:"required"`

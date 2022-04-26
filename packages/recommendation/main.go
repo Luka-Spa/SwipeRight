@@ -19,8 +19,9 @@ func main() {
 	}
 	flag.Parse()
 	config.Init(*environment)
-	httpRouter.Init()
 	consumer.NewKafkaConsumer().ConsumeUserProfile()
+	httpRouter.Init()
+
 	waitForSyscall()
 }
 

@@ -5,7 +5,6 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"errors"
-	"fmt"
 	"reflect"
 )
 
@@ -47,12 +46,10 @@ func Decrypt(text, secret string) (string, error) {
 }
 
 func EncryptProps(o interface{}, secret string) error {
-	fmt.Println("#", reflect.ValueOf(o))
 	ptrValue := reflect.ValueOf(o)
 	v := ptrValue.Elem()
 	vType := v.Type()
 	if vType.Kind() != reflect.Struct {
-		fmt.Println("Passed")
 		return errors.New("type of object is not a struct")
 	}
 	for i := 0; i < vType.NumField(); i++ {
@@ -69,7 +66,6 @@ func EncryptProps(o interface{}, secret string) error {
 		}
 
 		result, err := Encrypt([]byte(sourceField.String()), secret)
-		//fmt.Println(sourceField.String(), result)
 		if err != nil {
 			return err
 		}

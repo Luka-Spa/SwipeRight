@@ -8,9 +8,9 @@ import (
 	"github.com/Luka-Spa/SwipeRight/packages/profile/config"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/repository"
 	httpRouter "github.com/Luka-Spa/SwipeRight/packages/profile/router/http"
+	"github.com/Luka-Spa/SwipeRight/packages/profile/util/producer"
 	log "github.com/sirupsen/logrus"
 )
-
 
 func main() {
 	environment := flag.String("e", "development", "")
@@ -22,6 +22,7 @@ func main() {
 	log.Infof("Server starting in a %s environment", *environment)
 	config.Init(*environment)
 	repository.Init()
+	producer.InitProducers()
 	httpRouter.Init()
 
 	defer repository.DB.Close()
