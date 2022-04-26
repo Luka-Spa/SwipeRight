@@ -14,10 +14,10 @@ type UserProfile struct {
 	Lastname        string          `cql:"last_name" json:"last_name" mapstructure:"last_name" binding:"required" encrypt:""`
 	Gender          string          `cql:"gender" json:"gender" binding:"required,oneof=f m" encrypt:""`
 	Bio             string          `cql:"bio" json:"bio" binding:"required"`
-	Location        string          `cql:"location" json:"location" binding:"required" encrypt:""`
+	Location        Location        `cql:"location" json:"location" binding:"required"`
 	Anthem          string          `cql:"anthem" json:"anthem" binding:"required"`
 	School          string          `cql:"school" json:"school" binding:"required" encrypt:""`
 	CreatedAt       time.Time       `cql:"created_at" mapstructure:"created_at" json:"created_at"`
 	UpdatedAt       time.Time       `cql:"updated_at" mapstructure:"updated_at" json:"updated_at"`
-	Preferences     UserPreferences `cql:"preferences" mapstructure:"preferences" json:"preferences"`
+	Preferences     UserPreferences `cql:"preferences" mapstructure:"preferences" json:"preferences" encrypt:""`
 }

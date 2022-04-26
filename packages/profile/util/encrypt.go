@@ -5,6 +5,7 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"errors"
+	"fmt"
 	"reflect"
 )
 
@@ -22,15 +23,14 @@ func decode(s string) []byte {
 	return data
 }
 
-func Encrypt(text, secret string) (string, error) {
+func Encrypt(text []byte, secret string) (string, error) {
 	block, err := aes.NewCipher([]byte(secret))
 	if err != nil {
 		return "", err
 	}
-	plainText := []byte(text)
 	cfb := cipher.NewCFBEncrypter(block, bytes)
-	cipherText := make([]byte, len(plainText))
-	cfb.XORKeyStream(cipherText, plainText)
+	cipherText := make([]byte, len(text))
+	cfb.XORKeyStream(cipherText, text)
 	return encode(cipherText), nil
 }
 
@@ -47,20 +47,29 @@ func Decrypt(text, secret string) (string, error) {
 }
 
 func EncryptProps(o interface{}, secret string) error {
+	fmt.Println("#", reflect.ValueOf(o))
 	ptrValue := reflect.ValueOf(o)
 	v := ptrValue.Elem()
 	vType := v.Type()
 	if vType.Kind() != reflect.Struct {
+		fmt.Println("Passed")
 		return errors.New("type of object is not a struct")
 	}
 	for i := 0; i < vType.NumField(); i++ {
 		sourceTypeField := vType.Field(i)
 		sourceField := v.Field(i)
+		if sourceTypeField.Type.Kind() == reflect.Struct {
+			l := sourceField.Addr().Interface()
+			EncryptProps(l, secret)
+			continue
+		}
 		_, ok := sourceTypeField.Tag.Lookup("encrypt")
 		if !ok {
 			continue
 		}
-		result, err := Encrypt(sourceField.String(), secret)
+
+		result, err := Encrypt([]byte(sourceField.String()), secret)
+		//fmt.Println(sourceField.String(), result)
 		if err != nil {
 			return err
 		}

@@ -1,0 +1,14 @@
+host: 127.0.0.1
+http:
+  port: 8081
+kafka:
+  topic:
+  brokers:
+    - http://broker1.com
+    - http://broker2.com
+cassandra:
+  keyspace:
+  hosts:
+    - 127.0.0.1
+  username:
+  password:
