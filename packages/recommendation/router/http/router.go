@@ -6,8 +6,9 @@ import (
 
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/config"
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/logic"
-	"github.com/Luka-Spa/SwipeRight/packages/recommendation/repository"
+	"github.com/Luka-Spa/SwipeRight/packages/recommendation/repository/cassandra"
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/router/http/handler"
+	"github.com/Luka-Spa/SwipeRight/packages/recommendation/service/consumer"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,9 +19,11 @@ func Init() {
 	}
 	engine := gin.Default()
 
-	recommendationRepository := repository.RecommendationRepository
-	reccomendationLogic := logic.NewUserlogic(recommendationRepository)
-	reccomendationHandler := handler.NewUserHandler(reccomendationLogic)
+	recommendationRepository := cassandra.NewRecommendationRepository()
+	recomendationLogic := logic.NewUserlogic(recommendationRepository)
+	reccomendationHandler := handler.NewUserHandler(recomendationLogic)
+	userProfileConsumer := consumer.NewKafkaConsumer(recomendationLogic)
+	userProfileConsumer.ConsumeUserProfile()
 
 	engine.SetTrustedProxies([]string{})
 	engine.Use(gin.Recovery())

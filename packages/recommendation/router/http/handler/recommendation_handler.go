@@ -7,9 +7,9 @@ import (
 
 type reccomendationHandler struct{}
 
-var reccomendationLogic logic.IReccomendationLogic
+var reccomendationLogic logic.IRecomendationLogic
 
-func NewUserHandler(logic logic.IReccomendationLogic) *reccomendationHandler {
+func NewUserHandler(logic logic.IRecomendationLogic) *reccomendationHandler {
 	reccomendationLogic = logic
 	return &reccomendationHandler{}
 }

@@ -6,16 +6,19 @@ import (
 	"fmt"
 
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/config"
+	"github.com/Luka-Spa/SwipeRight/packages/recommendation/logic"
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/model"
 	"github.com/segmentio/kafka-go"
 	log "github.com/sirupsen/logrus"
 )
 
 var brokers []string
+var recommendationLogic logic.IRecomendationLogic
 
-func NewKafkaConsumer() IConsumer {
+func NewKafkaConsumer(logic logic.IRecomendationLogic) IConsumer {
 	var conf = config.GetConfig()
 	brokers = conf.GetStringSlice("kafka.brokers")
+	recommendationLogic = logic
 	return &Consumer{}
 }
 
@@ -28,6 +31,8 @@ func (*Consumer) ConsumeUserProfile() {
 		if err != nil {
 			log.Error(err)
 		}
+		fmt.Println("#", user)
+		recommendationLogic.CreateRecommendationProfile(user)
 		log.Info(user)
 	})
 }
