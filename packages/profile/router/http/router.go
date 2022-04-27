@@ -35,5 +35,5 @@ func Init() {
 	})
 	api.POST("/user", userHandler.CreateUser)
 
-	fmt.Println(engine.Run(fmt.Sprintf(":%s", config.GetString("http.port"))))
+	fmt.Println(engine.Run(fmt.Sprintf("%s:%s", config.GetString("host"), config.GetString("http.port"))))
 }

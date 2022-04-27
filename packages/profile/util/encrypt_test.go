@@ -13,7 +13,7 @@ func TestEncrypt(t *testing.T) {
 
 	// String to be encrypted
 	var str = "This string will be encrypted"
-	var encoded, err = Encrypt(str, secret)
+	var encoded, err = Encrypt([]byte(str), secret)
 	assert.Nil(t, err)
 	assert.NotEqual(t, str, encoded)
 }
@@ -25,7 +25,7 @@ func TestDecrypt(t *testing.T) {
 	// String to be decrypted
 	var str = "This string will be decrypted"
 
-	var encoded, _ = Encrypt(str, secret)
+	var encoded, _ = Encrypt([]byte(str), secret)
 
 	var decoded, err = Decrypt(encoded, secret)
 
@@ -39,7 +39,7 @@ func TestEncryptInvalidSecret(t *testing.T) {
 
 	var str = "This string will be encrypted"
 
-	var encoded, err = Encrypt(str, secret)
+	var encoded, err = Encrypt([]byte(str), secret)
 
 	// Returns empty string
 	assert.Equal(t, "", encoded)

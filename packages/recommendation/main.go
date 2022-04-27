@@ -3,11 +3,10 @@ package main
 import (
 	"flag"
 	"os"
-	"os/signal"
-	"syscall"
 
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/config"
-	"github.com/Luka-Spa/SwipeRight/packages/recommendation/service/consumer"
+	"github.com/Luka-Spa/SwipeRight/packages/recommendation/repository"
+	httpRouter "github.com/Luka-Spa/SwipeRight/packages/recommendation/router/http"
 )
 
 func main() {
@@ -18,12 +17,6 @@ func main() {
 	}
 	flag.Parse()
 	config.Init(*environment)
-	consumer.NewKafkaConsumer().Run()
-	waitForSyscall()
-}
-
-func waitForSyscall() {
-	quitChannel := make(chan os.Signal, 1)
-	signal.Notify(quitChannel, syscall.SIGINT, syscall.SIGTERM)
-	<-quitChannel
+	repository.Init()
+	httpRouter.Init()
 }

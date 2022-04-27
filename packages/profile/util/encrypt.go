@@ -22,15 +22,14 @@ func decode(s string) []byte {
 	return data
 }
 
-func Encrypt(text, secret string) (string, error) {
+func Encrypt(text []byte, secret string) (string, error) {
 	block, err := aes.NewCipher([]byte(secret))
 	if err != nil {
 		return "", err
 	}
-	plainText := []byte(text)
 	cfb := cipher.NewCFBEncrypter(block, bytes)
-	cipherText := make([]byte, len(plainText))
-	cfb.XORKeyStream(cipherText, plainText)
+	cipherText := make([]byte, len(text))
+	cfb.XORKeyStream(cipherText, text)
 	return encode(cipherText), nil
 }
 
@@ -56,11 +55,17 @@ func EncryptProps(o interface{}, secret string) error {
 	for i := 0; i < vType.NumField(); i++ {
 		sourceTypeField := vType.Field(i)
 		sourceField := v.Field(i)
+		if sourceTypeField.Type.Kind() == reflect.Struct {
+			l := sourceField.Addr().Interface()
+			EncryptProps(l, secret)
+			continue
+		}
 		_, ok := sourceTypeField.Tag.Lookup("encrypt")
 		if !ok {
 			continue
 		}
-		result, err := Encrypt(sourceField.String(), secret)
+
+		result, err := Encrypt([]byte(sourceField.String()), secret)
 		if err != nil {
 			return err
 		}

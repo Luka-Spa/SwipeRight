@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
-	"github.com/google/uuid"
+	"github.com/gocql/gocql"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -14,8 +14,8 @@ type MockRepository struct {
 	mock.Mock
 }
 
-func (mock *MockRepository) Create(user model.UserProfile) (error) {
-	return nil
+func (mock *MockRepository) Create(user model.UserProfile) (model.UserProfile, error) {
+	return user, nil
 }
 
 func (mock *MockRepository) All() ([]model.UserProfile, error) {
@@ -27,11 +27,11 @@ func (mock *MockRepository) All() ([]model.UserProfile, error) {
 func TestGetAll(t *testing.T) {
 	mockRepo := new(MockRepository)
 
-	var id, _ = uuid.NewUUID()
+	var id, _ = gocql.RandomUUID()
 	var firstName = "Go"
-	var	time = time.Now()
+	var time = time.Now()
 
-	userProfile := model.UserProfile{Id:id, Firstname: firstName, CreatedAt: time }
+	userProfile := model.UserProfile{Id: id, Firstname: firstName, CreatedAt: time}
 	// Setup expectations
 	mockRepo.On("All").Return([]model.UserProfile{userProfile}, nil)
 
@@ -50,12 +50,12 @@ func TestGetAll(t *testing.T) {
 
 func TestCreate(t *testing.T) {
 	mockRepo := new(MockRepository)
-	var id, _ = uuid.NewUUID()
+	var id, _ = gocql.RandomUUID()
 	var firstName = "Go"
-	var	time = time.Now()
-	userProfile := model.UserProfile{Id:id, Firstname: firstName, CreatedAt: time }
+	var time = time.Now()
+	userProfile := model.UserProfile{Id: id, Firstname: firstName, CreatedAt: time}
 	testService := NewUserlogic(mockRepo)
-	err :=testService.Create(userProfile)
+	err := testService.Create(userProfile)
 	mockRepo.AssertExpectations(t)
-	assert.Equal(t,nil,err)
+	assert.Equal(t, nil, err)
 }

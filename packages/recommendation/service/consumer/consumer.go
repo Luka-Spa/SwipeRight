@@ -1,7 +1,7 @@
 package consumer
 
 type IConsumer interface {
-	Run()
+	ConsumeUserProfile()
 }
 
 type Consumer struct {

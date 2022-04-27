@@ -35,5 +35,5 @@ func (handler *userHandler) CreateUser(c *gin.Context) {
 		c.Done()
 		return
 	}
-	c.JSON(http.StatusCreated, user)
+	c.AbortWithStatus(http.StatusCreated)
 }
