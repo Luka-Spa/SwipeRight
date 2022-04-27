@@ -7,10 +7,10 @@ import (
 
 type reccomendationHandler struct{}
 
-var reccomendationLogic logic.IRecomendationLogic
+// var reccomendationLogic logic.IRecomendationLogic
 
 func NewUserHandler(logic logic.IRecomendationLogic) *reccomendationHandler {
-	reccomendationLogic = logic
+	// reccomendationLogic = logic
 	return &reccomendationHandler{}
 }
 
