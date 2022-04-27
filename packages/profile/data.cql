@@ -22,4 +22,4 @@ create table IF NOT EXISTS profile.user_profile_table(
   school text,
   preferences FROZEN<user_preferences>,
   created_at timestamp,
-  updated_at timestamp, PRIMARY KEY(email));
+  updated_at timestamp, PRIMARY KEY(id));

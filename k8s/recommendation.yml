@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendation-deployment
+  labels:
+    app: recommendation
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: recommendation
+  template:
+    metadata:
+      labels:
+        app: recommendation
+    spec:
+      containers:
+        - name: recommendation
+          image: swiperight/recommendation:latest
+          ports:
+            - containerPort: 8081

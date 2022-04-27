@@ -10,7 +10,7 @@ func NewRecommendationRepository() *recommendationRepository {
 }
 
 func (*recommendationRepository) CreateRecommendationProfile(user model.RecommendationProfile) error {
-	var query = `INSERT INTO profile.user_profile_table
+	var query = `INSERT INTO recommendation.user_table
 							(id,profile_image_url,first_name,
 							gender,bio,location,anthem,school,preferences)
 							values (?,?,?,?,?,?,?,?,?);`
