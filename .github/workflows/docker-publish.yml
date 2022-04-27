@@ -1,11 +1,8 @@
 name: Docker
 
 on:
-  workflow_run:
-    workflows: ["CI"]
-    branches: [master]
-    types:
-      - completed
+  push:
+    branches: [main]
 
 jobs:
   docker-profile:
