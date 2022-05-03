@@ -5,7 +5,7 @@ metadata:
   labels:
     app: recommendation
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: recommendation
@@ -16,6 +16,10 @@ spec:
     spec:
       containers:
         - name: recommendation
-          image: swiperight/recommendation:latest
+          image: lukasoft/swiperight-recommendation
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
+          env:
+            - name: CASSANDRA_HOSTS
+              value: cassandra

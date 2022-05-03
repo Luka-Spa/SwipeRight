@@ -3,15 +3,20 @@ package cassandra
 import (
 	"time"
 
+	"github.com/Luka-Spa/SwipeRight/packages/profile/config"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/model"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/util"
 	"github.com/gocql/gocql"
 )
 
+var cryptor util.Cryptor
+
 type UserRepository struct {
 }
 
 func NewUserRepository() *UserRepository {
+	secret := config.GetConfig().GetString("encrypt.secret")
+	cryptor = *util.NewCryptor(secret)
 	return &UserRepository{}
 }
 
@@ -27,7 +32,7 @@ func (repo *UserRepository) Create(user model.UserProfile) (model.UserProfile, e
 	user.UpdatedAt = time.Now()
 	user.CreatedAt = time.Now()
 	uEnc := user
-	util.EncryptProps(&uEnc, "xMmz2AWsH4Vmzcidgt2a043394qgnUrI")
+	cryptor.EncryptProps(&uEnc)
 	var query = `INSERT INTO profile.user_profile_table
 							(id,email,profile_image_url,first_name,
 							last_name,gender,bio,location,anthem,school,preferences,created_at,updated_at)

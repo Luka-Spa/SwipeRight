@@ -5,7 +5,7 @@ metadata:
   labels:
     app: profile
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: profile
@@ -16,6 +16,10 @@ spec:
     spec:
       containers:
         - name: profile
-          image: swiperight/profile:latest
+          image: lukasoft/swiperight-profile
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+          env:
+            - name: CASSANDRA_HOSTS
+              value: cassandra

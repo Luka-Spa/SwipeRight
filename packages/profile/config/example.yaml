@@ -1,6 +1,6 @@
 host: 127.0.0.1
 http:
-  port: 8081
+  port: 8080
 kafka:
   enabled: false
   topic_prefix:
@@ -8,8 +8,10 @@ kafka:
     - http://broker1.com
     - http://broker2.com
 cassandra:
-  keyspace:
+  keyspace: profile
   hosts:
     - 127.0.0.1
   username:
   password:
+encrypt:
+  secret: "xMmz2AWsH4Vmzcidgt2a043394qgnUrI"
