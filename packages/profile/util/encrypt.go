@@ -9,21 +9,27 @@ import (
 )
 
 var bytes = []byte{35, 46, 57, 24, 85, 35, 24, 74, 87, 35, 88, 98, 66, 32, 14, 05}
-var _secret string
 
-type Cryptor struct {
+type crypt struct {
+	secret string
 }
 
-func NewCryptor(secret string) *Cryptor {
-	_secret = secret
-	return &Cryptor{}
+type ICryptor interface {
+	Encrypt(text []byte) (string, error)
+	Decrypt(text string) (string, error)
+	EncryptProps(o interface{}) error
+	DecryptProps(o interface{}) error
 }
 
-func encode(b []byte) string {
+func NewCryptor(secret string) ICryptor {
+	return &crypt{secret: secret}
+}
+
+func (*crypt) encode(b []byte) string {
 	return base64.StdEncoding.EncodeToString(b)
 }
 
-func decode(s string) []byte {
+func (*crypt) decode(s string) []byte {
 	data, err := base64.StdEncoding.DecodeString(s)
 	if err != nil {
 		panic(err)
@@ -31,30 +37,30 @@ func decode(s string) []byte {
 	return data
 }
 
-func (*Cryptor) Encrypt(text []byte) (string, error) {
-	block, err := aes.NewCipher([]byte(_secret))
+func (c *crypt) Encrypt(text []byte) (string, error) {
+	block, err := aes.NewCipher([]byte(c.secret))
 	if err != nil {
 		return "", err
 	}
 	cfb := cipher.NewCFBEncrypter(block, bytes)
 	cipherText := make([]byte, len(text))
 	cfb.XORKeyStream(cipherText, text)
-	return encode(cipherText), nil
+	return c.encode(cipherText), nil
 }
 
-func (*Cryptor) Decrypt(text string) (string, error) {
-	block, err := aes.NewCipher([]byte(_secret))
+func (c *crypt) Decrypt(text string) (string, error) {
+	block, err := aes.NewCipher([]byte(c.secret))
 	if err != nil {
 		return "", err
 	}
-	cipherText := decode(text)
+	cipherText := c.decode(text)
 	cfb := cipher.NewCFBDecrypter(block, bytes)
 	plainText := make([]byte, len(cipherText))
 	cfb.XORKeyStream(plainText, cipherText)
 	return string(plainText), nil
 }
 
-func (cryptor *Cryptor) EncryptProps(o interface{}) error {
+func (c *crypt) EncryptProps(o interface{}) error {
 	ptrValue := reflect.ValueOf(o)
 	v := ptrValue.Elem()
 	vType := v.Type()
@@ -66,7 +72,7 @@ func (cryptor *Cryptor) EncryptProps(o interface{}) error {
 		sourceField := v.Field(i)
 		if sourceTypeField.Type.Kind() == reflect.Struct {
 			l := sourceField.Addr().Interface()
-			cryptor.EncryptProps(l)
+			c.EncryptProps(l)
 			continue
 		}
 		_, ok := sourceTypeField.Tag.Lookup("encrypt")
@@ -74,7 +80,7 @@ func (cryptor *Cryptor) EncryptProps(o interface{}) error {
 			continue
 		}
 
-		result, err := cryptor.Encrypt([]byte(sourceField.String()))
+		result, err := c.Encrypt([]byte(sourceField.String()))
 		if err != nil {
 			return err
 		}
@@ -83,7 +89,7 @@ func (cryptor *Cryptor) EncryptProps(o interface{}) error {
 	return nil
 }
 
-func (cryptor *Cryptor) DecryptProps(o interface{}) error {
+func (c *crypt) DecryptProps(o interface{}) error {
 	ptrValue := reflect.ValueOf(o)
 	v := ptrValue.Elem()
 	vType := v.Type()
@@ -97,7 +103,7 @@ func (cryptor *Cryptor) DecryptProps(o interface{}) error {
 		if !ok {
 			continue
 		}
-		result, err := cryptor.Decrypt(sourceField.String())
+		result, err := c.Decrypt(sourceField.String())
 		if err != nil {
 			return err
 		}

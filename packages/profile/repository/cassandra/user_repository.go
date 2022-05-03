@@ -9,14 +9,14 @@ import (
 	"github.com/gocql/gocql"
 )
 
-var cryptor util.Cryptor
+var cryptor util.ICryptor
 
 type UserRepository struct {
 }
 
 func NewUserRepository() *UserRepository {
 	secret := config.GetConfig().GetString("encrypt.secret")
-	cryptor = *util.NewCryptor(secret)
+	cryptor = util.NewCryptor(secret)
 	return &UserRepository{}
 }
 
