@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var cryptor *Cryptor
+var cryptor ICryptor
 
 func TestMain(m *testing.M) {
 	cryptor = NewCryptor("xMmz2AWsH4Vmzcidgt2a043394qgnUrI")
@@ -24,8 +24,6 @@ func TestEncrypt(t *testing.T) {
 }
 
 func TestDecrypt(t *testing.T) {
-	// 32-byte secret
-	//var secret = "xMmz2AWsH4Vmzcidgt2a043394qgnUrI"
 
 	// String to be decrypted
 	var str = "This string will be decrypted"
@@ -68,7 +66,7 @@ func TestEncryptProps(t *testing.T) {
 }
 
 func TestDecryptProps(t *testing.T) {
-	//var secret = "xMmz2AWsH4Vmzcidgt2a043394qgnUrI"
+
 	var email = "test@example.com"
 	var anthem = "test anthem"
 	var school = "test school"
