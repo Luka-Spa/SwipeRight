@@ -21,15 +21,17 @@ func Init() {
 
 	recommendationRepository := cassandra.NewRecommendationRepository()
 	recomendationLogic := logic.NewUserlogic(recommendationRepository)
-	reccomendationHandler := handler.NewUserHandler(recomendationLogic)
+	recommendationHandler := handler.NewUserHandler(recomendationLogic)
 	userProfileConsumer := consumer.NewKafkaConsumer(recomendationLogic)
-	userProfileConsumer.ConsumeUserProfile()
+	if config.GetBool("kafka.enabled") {
+		userProfileConsumer.ConsumeUserProfile()
+	}
 
 	engine.SetTrustedProxies([]string{})
 	engine.Use(gin.Recovery())
 
 	api := engine.Group("/api/")
-	api.GET("/reccomend/:user_id", reccomendationHandler.Reccomend)
+	api.GET("/recommend/:user_id", recommendationHandler.Recommend)
 	//Routes are defined here
 	api.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": "ok"})
