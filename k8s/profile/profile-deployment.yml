@@ -23,8 +23,6 @@ spec:
           env:
             - name: CASSANDRA_HOSTS
               value: cassandra
-            - name: CASSANDRA_HOSTS
-              value: cassandra
             - name: KAFKA_ENABLED
               value: "true"
             - name: KAFKA_BROKERS
