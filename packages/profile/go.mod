@@ -49,12 +49,14 @@ require (
 
 require (
 	github.com/go-playground/validator/v10 v10.10.1
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/google/uuid v1.3.0
 	github.com/segmentio/kafka-go v0.4.31
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/viper v1.10.1
 	github.com/stretchr/testify v1.7.1
 	golang.org/x/crypto v0.0.0-20220321153916-2c7772ba3064 // indirect
+	golang.org/x/exp v0.0.0-20220518171630-0b5c67f07fdf
 	golang.org/x/sys v0.0.0-20220319134239-a9b59b0215f8 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 )

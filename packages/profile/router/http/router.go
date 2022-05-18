@@ -29,11 +29,11 @@ func Init() {
 	api := engine.Group("/api/")
 
 	//Routes are defined here
-	api.GET("/user", userHandler.GetAllUsers)
+	api.GET("/user", func(c *gin.Context) { handler.Auth(c, []string{"read:users"}) }, userHandler.GetAllUsers)
 	api.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": "ok"})
 	})
-	api.POST("/user", userHandler.CreateUser)
+	api.POST("/user", func(c *gin.Context) { handler.Auth(c, []string{"create:users"}) }, userHandler.CreateUser)
 
 	fmt.Println(engine.Run(fmt.Sprintf("%s:%s", config.GetString("host"), config.GetString("http.port"))))
 }
