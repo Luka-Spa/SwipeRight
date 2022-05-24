@@ -8,8 +8,8 @@ import (
 	"github.com/Luka-Spa/SwipeRight/packages/profile/logic"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/repository"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/router/http/handler"
-
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func Init() {
@@ -25,7 +25,7 @@ func Init() {
 
 	engine.SetTrustedProxies([]string{})
 	engine.Use(gin.Recovery())
-
+	engine.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	api := engine.Group("/api/")
 
 	//Routes are defined here

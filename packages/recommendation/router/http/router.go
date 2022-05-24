@@ -10,6 +10,7 @@ import (
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/router/http/handler"
 	"github.com/Luka-Spa/SwipeRight/packages/recommendation/service/consumer"
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func Init() {
@@ -29,7 +30,7 @@ func Init() {
 
 	engine.SetTrustedProxies([]string{})
 	engine.Use(gin.Recovery())
-
+	engine.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	api := engine.Group("/api/")
 	api.GET("/recommend/:user_id", recommendationHandler.Recommend)
 	//Routes are defined here
