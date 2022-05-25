@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  docker-profile:
+  docker:
     environment: docker
     runs-on: ubuntu-latest
     steps:
