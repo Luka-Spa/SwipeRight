@@ -1,0 +1,8 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: swiperight-jwt
+config:
+  secret_is_base64: false
+  run_on_preflight: true
+plugin: jwt

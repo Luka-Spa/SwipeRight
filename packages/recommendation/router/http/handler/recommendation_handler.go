@@ -5,14 +5,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type reccomendationHandler struct{}
+type recommendationHandler struct{}
 
-// var reccomendationLogic logic.IRecomendationLogic
+// var recommendationLogic logic.IRecomendationLogic
 
-func NewUserHandler(logic logic.IRecomendationLogic) *reccomendationHandler {
-	// reccomendationLogic = logic
-	return &reccomendationHandler{}
+func NewUserHandler(logic logic.IRecomendationLogic) *recommendationHandler {
+	// recommendationLogic = logic
+	return &recommendationHandler{}
 }
 
-func (*reccomendationHandler) Reccomend(c *gin.Context) {
+func (*recommendationHandler) Recommend(c *gin.Context) {
 }

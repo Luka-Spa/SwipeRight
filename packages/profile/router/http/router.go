@@ -8,8 +8,8 @@ import (
 	"github.com/Luka-Spa/SwipeRight/packages/profile/logic"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/repository"
 	"github.com/Luka-Spa/SwipeRight/packages/profile/router/http/handler"
-
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func Init() {
@@ -25,15 +25,15 @@ func Init() {
 
 	engine.SetTrustedProxies([]string{})
 	engine.Use(gin.Recovery())
-
+	engine.GET("/metrics", gin.WrapH(promhttp.Handler()))
+	engine.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message": "ok"})
+	})
 	api := engine.Group("/api/")
 
 	//Routes are defined here
-	api.GET("/user", userHandler.GetAllUsers)
-	api.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "ok"})
-	})
-	api.POST("/user", userHandler.CreateUser)
+	api.GET("/user", func(c *gin.Context) { handler.Auth(c, []string{"read:users"}) }, userHandler.GetAllUsers)
+	api.POST("/user", func(c *gin.Context) { handler.Auth(c, []string{"create:users"}) }, userHandler.CreateUser)
 
 	fmt.Println(engine.Run(fmt.Sprintf("%s:%s", config.GetString("host"), config.GetString("http.port"))))
 }
