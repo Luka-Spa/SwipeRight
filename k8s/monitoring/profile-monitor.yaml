@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: profile-monitor
+  namespace: monitoring
+  labels:
+    name: profile-monitor
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: profile
+  endpoints:
+    - port: http

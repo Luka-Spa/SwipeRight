@@ -31,12 +31,12 @@ func Init() {
 	engine.SetTrustedProxies([]string{})
 	engine.Use(gin.Recovery())
 	engine.GET("/metrics", gin.WrapH(promhttp.Handler()))
+	engine.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message": "ok"})
+	})
 	api := engine.Group("/api/")
 	api.GET("/recommend/:user_id", recommendationHandler.Recommend)
 	//Routes are defined here
-	api.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "ok"})
-	})
 
 	fmt.Println(engine.Run(fmt.Sprintf("%s:%s", config.GetString("host"), config.GetString("http.port"))))
 }
