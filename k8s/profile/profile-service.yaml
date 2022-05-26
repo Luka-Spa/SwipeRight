@@ -4,6 +4,8 @@ metadata:
   name: profile
   # annotations:
   #   konghq.com/plugins: swiperight-jwt
+  labels:
+    app: profile
 spec:
   selector:
     app: profile
@@ -11,3 +13,4 @@ spec:
   - name: http
     protocol: TCP
     port: 8080
+    targetPort: 8080

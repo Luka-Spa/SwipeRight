@@ -1,8 +1,8 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
+  namespace: default
   name: profile-monitor
-  namespace: monitoring
   labels:
     name: profile-monitor
     release: prometheus
@@ -12,3 +12,4 @@ spec:
       app: profile
   endpoints:
     - port: http
+

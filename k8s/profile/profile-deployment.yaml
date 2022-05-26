@@ -19,7 +19,8 @@ spec:
           image: lukasoft/swiperight-profile
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - name: http
+              containerPort: 8080
           env:
             - name: CASSANDRA_HOSTS
               value: cassandra
