@@ -4,6 +4,8 @@ metadata:
   name: profile
   # annotations:
   #   konghq.com/plugins: swiperight-jwt
+  annotations:
+      konghq.com/plugins: kong-cache
   labels:
     app: profile
 spec:
