@@ -4,7 +4,7 @@ import { Counter } from 'k6/metrics';
 
 // A simple counter for http requests
 export const requests = new Counter('http_reqs');
-const port = __ENV.PORT || 8085
+const port = __ENV.PORT || 8089
 const ip = __ENV.HOST || "localhost"
 const token = __ENV.TOKEN || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRlc3QgVXNlciIsImlhdCI6MTUxNjIzOTAyMiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOnVzZXJzIiwicmVhZDp1c2VycyJdfQ.jRY6RmVeZXwh_gu8sM-kVlcnTlVlOcXJV57c6bCNHnY"
 
@@ -36,7 +36,7 @@ const u = () => {
 // target is the number of VUs you are aiming for
 export const options = {
   stages: [
-    { target: 20, duration: '1m' },
+    { target: 100, duration: '1m' },
     { target: 15, duration: '1m' },
     { target: 0, duration: '1m' },
   ],
@@ -56,11 +56,11 @@ export default function () {
       });
     });
     sleep(1)
-    group('Post user', function () {
-      const res = http.post(`http://${ip}:${port}/api/user`,u , {headers: {Authorization: "Bearer " + token }});
-      check(res, {
-        'is status code 201': (r) => r.status === 201,
-      });
-    });
+    // group('Post user', function () {
+    //   const res = http.post(`http://${ip}:${port}/api/user`,u , {headers: {Authorization: "Bearer " + token }});
+    //   check(res, {
+    //     'is status code 201': (r) => r.status === 201,
+    //   });
+    // });
   });
 }

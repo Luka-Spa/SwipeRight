@@ -1,6 +1,8 @@
 package cassandra
 
 import (
+	"time"
+
 	"github.com/gocql/gocql"
 	"github.com/mitchellh/mapstructure"
 	log "github.com/sirupsen/logrus"
@@ -13,6 +15,8 @@ func Connect(config *viper.Viper) *gocql.Session {
 	cluster := gocql.NewCluster(config.GetStringSlice("cassandra.hosts")...)
 	cluster.Consistency = gocql.Quorum
 	cluster.ProtoVersion = 4
+	cluster.ConnectTimeout = time.Second * 10
+	cluster.DisableInitialHostLookup = true
 	cluster.Keyspace = config.GetString("cassandra.keyspace")
 	cluster.Authenticator = gocql.PasswordAuthenticator{Username: config.GetString("cassandra.username"), Password: config.GetString("cassandra.password")} //replace the username and password fields with their real settings.
 	var err error
@@ -56,4 +60,3 @@ func CassandraRead[T any](query string, result T, values ...interface{}) []T {
 	}
 	return results
 }
-
