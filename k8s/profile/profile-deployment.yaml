@@ -6,6 +6,8 @@ metadata:
     app: profile
 spec:
   replicas: 1
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: profile
@@ -24,7 +26,20 @@ spec:
           env:
             - name: CASSANDRA_HOSTS
               value: cassandra
+            - name: CASSANDRA_KEYSPACE
+              value: profile
+            - name: CASSANDRA_USERNAME
+              value:
+            - name: CASSANDRA_PASSWORD
+              value:
             - name: KAFKA_ENABLED
               value: "true"
             - name: KAFKA_BROKERS
               value: "192.168.1.240"
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1024MiB
+            requests:
+              cpu: 500m
+              memory: 256MiB
