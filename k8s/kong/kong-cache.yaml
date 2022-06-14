@@ -1,0 +1,17 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: kong-cache
+config:
+  response_code:
+  - 200
+  - 201
+  request_method:
+  - GET
+  - HEAD
+  content_type:
+  - text/plain
+  - application/json
+  cache_ttl: 300
+  strategy: memory
+plugin: proxy-cache

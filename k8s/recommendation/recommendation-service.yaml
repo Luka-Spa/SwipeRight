@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: recommendation
+  annotations:
+    konghq.com/plugins: kong-cache
 spec:
   selector:
     app: recommendation
